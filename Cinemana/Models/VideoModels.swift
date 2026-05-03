@@ -45,6 +45,51 @@ struct VideoModel: Codable, Identifiable, Hashable {
     let writersInfo: [StaffInfo]?
     let videoLanguages: [String: String]?
 
+    init(nb: String, arTitle: String? = nil, enTitle: String? = nil, customArTitle: String? = nil, customEnTitle: String? = nil, arContent: String? = nil, enContent: String? = nil, kind: String? = nil, year: String? = nil, duration: String? = nil, stars: String? = nil, rate: String? = nil, filmRating: String? = nil, seriesRating: String? = nil, imgObjUrl: String? = nil, imgMediumThumbObjUrl: String? = nil, imgThumbObjUrl: String? = nil, trailer: String? = nil, imdbUrlRef: String? = nil, episodeFlag: String? = nil, episodeNummer: String? = nil, season: String? = nil, rootSeries: String? = nil, listId: String? = nil, itemDate: String? = nil, publishDate: String? = nil, videoLikesNumber: String? = nil, videoDisLikesNumber: String? = nil, videoViewsNumber: String? = nil, videoCommentsNumber: Int? = nil, showComments: Bool? = nil, castable: String? = nil, isSpecial: String? = nil, hasIntroSkipping: Bool? = nil, introSkipping: [String]? = nil, skippingDurations: [String: String]? = nil, translations: [TranslationInfo]? = nil, categories: [Category]? = nil, actorsInfo: [StaffInfo]? = nil, directorsInfo: [StaffInfo]? = nil, writersInfo: [StaffInfo]? = nil, videoLanguages: [String: String]? = nil) {
+        self.nb = nb
+        self.arTitle = arTitle
+        self.enTitle = enTitle
+        self.customArTitle = customArTitle
+        self.customEnTitle = customEnTitle
+        self.arContent = arContent
+        self.enContent = enContent
+        self.kind = kind
+        self.year = year
+        self.duration = duration
+        self.stars = stars
+        self.rate = rate
+        self.filmRating = filmRating
+        self.seriesRating = seriesRating
+        self.imgObjUrl = imgObjUrl
+        self.imgMediumThumbObjUrl = imgMediumThumbObjUrl
+        self.imgThumbObjUrl = imgThumbObjUrl
+        self.trailer = trailer
+        self.imdbUrlRef = imdbUrlRef
+        self.episodeFlag = episodeFlag
+        self.episodeNummer = episodeNummer
+        self.season = season
+        self.rootSeries = rootSeries
+        self.listId = listId
+        self.itemDate = itemDate
+        self.publishDate = publishDate
+        self.videoLikesNumber = videoLikesNumber
+        self.videoDisLikesNumber = videoDisLikesNumber
+        self.videoViewsNumber = videoViewsNumber
+        self.videoCommentsNumber = videoCommentsNumber
+        self.showComments = showComments
+        self.castable = castable
+        self.isSpecial = isSpecial
+        self.hasIntroSkipping = hasIntroSkipping
+        self.introSkipping = introSkipping
+        self.skippingDurations = skippingDurations
+        self.translations = translations
+        self.categories = categories
+        self.actorsInfo = actorsInfo
+        self.directorsInfo = directorsInfo
+        self.writersInfo = writersInfo
+        self.videoLanguages = videoLanguages
+    }
+
     var title: String {
         customArTitle ?? customEnTitle ?? arTitle ?? enTitle ?? ""
     }

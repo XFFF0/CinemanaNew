@@ -1,4 +1,5 @@
 import Foundation
+import UIKit
 
 struct DownloadItem: Identifiable, Codable {
     var id: String { videoId }
@@ -103,7 +104,7 @@ enum VideoQuality: String, CaseIterable {
     }
 }
 
-enum SubtitlePosition: String, CaseIterable {
+enum SubtitlePosition: String, CaseIterable, Codable {
     case top = "top"
     case middle = "middle"
     case bottom = "bottom"
@@ -117,7 +118,7 @@ enum SubtitlePosition: String, CaseIterable {
     }
 }
 
-enum SubtitleSize: String, CaseIterable {
+enum SubtitleSize: String, CaseIterable, Codable {
     case small = "small"
     case medium = "medium"
     case large = "large"

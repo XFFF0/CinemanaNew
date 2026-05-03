@@ -187,25 +187,3 @@ class AuthManager: ObservableObject {
         }
     }
 }
-
-import UIKit
-
-enum AuthError: Error, LocalizedError {
-    case loginFailed
-    case refreshFailed
-    case invalidCredentials
-    case networkError
-
-    var errorDescription: String? {
-        switch self {
-        case .loginFailed:
-            return "Login failed. Please try again."
-        case .refreshFailed:
-            return "Session expired. Please login again."
-        case .invalidCredentials:
-            return "Invalid email or password."
-        case .networkError:
-            return "Network error. Please check your connection."
-        }
-    }
-}

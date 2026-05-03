@@ -35,7 +35,7 @@ class APIService {
         request.setValue("no-cache", forHTTPHeaderField: "Cache-Control")
 
         if requiresAuth {
-            let token = AuthManager.shared.accessToken
+            let token = UserDefaults.standard.string(forKey: "com.shabakaty.cinemanaa.accessToken") ?? ""
             if !token.isEmpty {
                 request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
             }
