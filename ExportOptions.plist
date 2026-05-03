@@ -9,6 +9,6 @@
     <key>signingCertificate</key>
     <string>-</string>
     <key>teamID</key>
-    <string></string>
+    <string>YOUR_TEAM_ID</string>
 </dict>
 </plist>
