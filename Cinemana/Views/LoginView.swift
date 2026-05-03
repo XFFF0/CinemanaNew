@@ -144,11 +144,13 @@ struct ForgotPasswordView: View {
                     .autocapitalization(.none)
 
                 Button(action: resetPassword) {
-                    if isLoading {
-                        ProgressView()
-                            .tint(.white)
-                    } else {
-                        Text("Reset Password")
+                    Group {
+                        if isLoading {
+                            ProgressView()
+                                .tint(.white)
+                        } else {
+                            Text("Reset Password")
+                        }
                     }
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 14)

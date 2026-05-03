@@ -28,10 +28,10 @@ struct ProfileView: View {
                             }
                             
                             VStack(alignment: .leading) {
-                                Text(userInfo.name)
+                                Text(userInfo.name ?? "")
                                     .font(.headline)
                                     .foregroundColor(.white)
-                                Text(userInfo.email)
+                                Text(userInfo.email ?? "")
                                     .font(.caption)
                                     .foregroundColor(.gray)
                             }
