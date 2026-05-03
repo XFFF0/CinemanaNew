@@ -6,6 +6,7 @@ struct VideoDetailView: View {
     let video: VideoModel
     @StateObject private var viewModel: VideoDetailViewModel
     
+    // ✅ الإصلاح هنا: تهيئة self.video أولاً ثم الـ viewModel
     init(video: VideoModel) {
         self.video = video
         self._viewModel = StateObject(wrappedValue: VideoDetailViewModel(video: video))
@@ -145,7 +146,7 @@ struct VideoDetailView: View {
             VideoPlayerView(video: video, quality: selectedQuality)
         }
         .onAppear {
-            // تجاهل النتيجة لتجنب التحذير، أو استخدامها إذا لزم الأمر
+            // ✅ إصلاح التحذير: تجاهل النتيجة باستخدام _ =
             _ = viewModel.checkFavorite(video)
         }
     }
@@ -226,7 +227,6 @@ struct VideoPlayerView: View {
 
 #Preview {
     NavigationStack {
-        // استخدام الاسم الكامل للـ Struct لتجنب الغموض مع ViewModel
         VideoDetailView(video: VideoModel(
             nb: "1",
             arTitle: "Film Name",
