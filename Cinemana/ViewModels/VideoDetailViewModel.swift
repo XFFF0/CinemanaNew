@@ -16,6 +16,7 @@ class VideoDetailViewModel: ObservableObject {
     @Published var seasons: [String] = []
 
     @Published var watchProgress: Double = 0
+    @Published var isFavorite: Bool = false
 
     init(video: VideoModel) {
         self.video = video
@@ -130,5 +131,14 @@ class VideoDetailViewModel: ObservableObject {
 
     func checkFavorite(_ video: VideoModel) -> Bool {
         return WatchLaterManager.shared.isInWatchLater(videoId: video.nb)
+    }
+
+    func toggleFavorite(_ video: VideoModel) {
+        if isFavorite {
+            WatchLaterManager.shared.removeFromWatchLater(videoId: video.nb)
+        } else {
+            WatchLaterManager.shared.addToWatchLater(video: video)
+        }
+        isFavorite.toggle()
     }
 }
