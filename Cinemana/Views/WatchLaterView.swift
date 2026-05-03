@@ -24,8 +24,8 @@ struct WatchLaterView: View {
                                     arTitle: item.title,
                                     enTitle: item.title,
                                     kind: item.kind,
-                                    imgThumbObjUrl: item.thumbnailUrl,
-                                    imgObjUrl: item.thumbnailUrl
+                                    imgObjUrl: item.thumbnailUrl,
+                                    imgThumbObjUrl: item.thumbnailUrl
                                 ))) {
                                     WatchLaterItemRow(item: item)
                                 }
