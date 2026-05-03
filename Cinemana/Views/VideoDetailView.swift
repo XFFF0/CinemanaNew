@@ -143,48 +143,6 @@ struct VideoDetailView: View {
     }
 }
 
-class VideoDetailViewModel: ObservableObject {
-    @Published var isFavorite = false
-    @Published var transcodedFiles: [TranscodeFile] = []
-    @Published var isLoading = false
-    
-    private let downloadManager = DownloadManager.shared
-    
-    func downloadVideo(_ video: VideoModel, quality: String) {
-        downloadManager.downloadVideo(video, quality: quality)
-    }
-    
-    func toggleFavorite(_ video: VideoModel) {
-        Task {
-            do {
-                if isFavorite {
-                    try await APIService.shared.removeSubscription(videoId: video.nb)
-                } else {
-                    try await APIService.shared.addSubscription(videoId: video.nb)
-                }
-                await MainActor.run {
-                    isFavorite.toggle()
-                }
-            } catch {
-                print("Favorite error: \(error)")
-            }
-        }
-    }
-    
-    func checkFavorite(_ video: VideoModel) {
-        Task {
-            do {
-                let subscriptions = try await APIService.shared.getSubscriptions()
-                await MainActor.run {
-                    isFavorite = subscriptions.contains { $0.nb == video.nb }
-                }
-            } catch {
-                print("Check favorite error: \(error)")
-            }
-        }
-    }
-}
-
 struct VideoPlayerView: View {
     let video: VideoModel
     let quality: String
