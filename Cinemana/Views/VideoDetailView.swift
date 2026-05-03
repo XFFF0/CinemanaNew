@@ -4,7 +4,11 @@ import Kingfisher
 
 struct VideoDetailView: View {
     let video: VideoModel
-    @StateObject private var viewModel = VideoDetailViewModel()
+    @StateObject private var viewModel: VideoDetailViewModel
+    
+    init(video: VideoModel) {
+        self._viewModel = StateObject(wrappedValue: VideoDetailViewModel(video: video))
+    }
     @State private var showPlayer = false
     @State private var selectedQuality: String = "720"
     
