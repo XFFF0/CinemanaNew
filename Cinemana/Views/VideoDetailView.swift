@@ -237,4 +237,3 @@ struct VideoPlayerView: View {
     }
     .preferredColorScheme(.dark)
 }
-
