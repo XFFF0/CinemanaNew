@@ -126,9 +126,10 @@ class VideoDetailViewModel: ObservableObject {
             return
         }
         
-        DownloadManager.shared.startDownload(video: video, file: file)
+        DownloadManager.shared.downloadVideo(video, quality: quality)
     }
 
+    @discardableResult
     func checkFavorite(_ video: VideoModel) -> Bool {
         return WatchLaterManager.shared.isInWatchLater(videoId: video.nb)
     }
@@ -137,7 +138,7 @@ class VideoDetailViewModel: ObservableObject {
         if isFavorite {
             WatchLaterManager.shared.removeFromWatchLater(videoId: video.nb)
         } else {
-            WatchLaterManager.shared.addToWatchLater(video: video)
+            WatchLaterManager.shared.addToWatchLater(video)
         }
         isFavorite.toggle()
     }
