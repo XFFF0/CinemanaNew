@@ -6,8 +6,9 @@ struct VideoDetailView: View {
     let video: VideoModel
     @StateObject private var viewModel: VideoDetailViewModel
     
+    // ✅ إصلاح 1: تهيئة self.video أولاً ثم الـ viewModel
     init(video: VideoModel) {
-        self.video = video // هذا السطر ضروري لحل خطأ "not initialized"
+        self.video = video
         self._viewModel = StateObject(wrappedValue: VideoDetailViewModel(video: video))
     }
     
@@ -145,7 +146,8 @@ struct VideoDetailView: View {
             VideoPlayerView(video: video, quality: selectedQuality)
         }
         .onAppear {
-            _ = viewModel.checkFavorite(video) // تجاهل النتيجة لتجنب التحذير
+            // ✅ إصلاح 2: تجاهل النتيجة لتجنب تحذير "unused result" الذي يسبب فشل البناء
+            _ = viewModel.checkFavorite(video)
         }
     }
 }
