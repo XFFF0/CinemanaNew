@@ -7,10 +7,8 @@ struct VideoDetailView: View {
     @StateObject private var viewModel: VideoDetailViewModel
     
     init(video: VideoModel) {
-        self.video = video // هذا السطر ضروري لحل خطأ "not initialized"
         self._viewModel = StateObject(wrappedValue: VideoDetailViewModel(video: video))
     }
-    
     @State private var showPlayer = false
     @State private var selectedQuality: String = "720"
     
@@ -120,7 +118,6 @@ struct VideoDetailView: View {
                                                 .resizable()
                                                 .frame(width: 70, height: 70)
                                                 .clipShape(Circle())
-                                            
                                             Text(actor.name ?? "")
                                                 .font(.caption)
                                                 .foregroundColor(.white)
@@ -145,7 +142,7 @@ struct VideoDetailView: View {
             VideoPlayerView(video: video, quality: selectedQuality)
         }
         .onAppear {
-            _ = viewModel.checkFavorite(video) // تجاهل النتيجة لتجنب التحذير
+            viewModel.checkFavorite(video)
         }
     }
 }
@@ -185,6 +182,7 @@ struct VideoPlayerView: View {
                     Spacer()
                 }
                 .padding()
+                
                 Spacer()
             }
         }
@@ -200,6 +198,7 @@ struct VideoPlayerView: View {
         Task {
             do {
                 let files = try await APIService.shared.getTranscodedFiles(videoId: video.nb)
+                
                 guard let selectedFile = files.first(where: { $0.resolution == quality }) ?? files.first,
                       let urlString = selectedFile.videoUrl,
                       let url = URL(string: urlString) else {
@@ -237,4 +236,3 @@ struct VideoPlayerView: View {
     }
     .preferredColorScheme(.dark)
 }
-
