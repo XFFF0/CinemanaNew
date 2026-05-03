@@ -1,218 +1,172 @@
 // !$*UTF8*$!
 {
 	archiveVersion = 1;
-	classes = {};
+	classes = {
+	};
 	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B196587652DF4EDFA308C62D = {isa = PBXBuildFile; fileRef = 7BC70238EDB04263A1D68413; };
-		017E7B4869AA4841B85E99ED = {isa = PBXBuildFile; fileRef = 4945FFB0A0F346529F4F29CD; };
-		7921CE16C6F34CC0BEB3F49C = {isa = PBXBuildFile; fileRef = 002A5A89C10441A29D242B5E; };
-		F9EFE8DBEE8D4DA09C3C03EF = {isa = PBXBuildFile; fileRef = F0FED13D3799445FB3EA9372; };
-		D29D3E07698D4ED89794351F = {isa = PBXBuildFile; fileRef = CFFEA2EAC4624E428BE51316; };
-		0510C89274C043309DC0AD1C = {isa = PBXBuildFile; fileRef = 7D29DAEE562545EAA1C722EF; };
-		FA399EDAC96041A29C6C4AE9 = {isa = PBXBuildFile; fileRef = A858334E496F4A1BB3AA0E26; };
-		81F382AFB8B240D0A19B7E97 = {isa = PBXBuildFile; fileRef = 21F28B4F44A8466CBB2D2E90; };
-		E19EEE377A754C38B08FC56C = {isa = PBXBuildFile; fileRef = 08BAFC0953164B8DB67D3772; };
-		22394BEA97324A388699D261 = {isa = PBXBuildFile; fileRef = 3A7610ABA2244206AD4D5C1E; };
-		42DAAA07028D4AA59804ABF6 = {isa = PBXBuildFile; fileRef = 4A4DD5631CB54FC9AAF15E1F; };
+		A30D49AFB1CF48F8A4A87317 = {isa = PBXBuildFile; fileRef = 4A8930EFBF96477F8AF75565; };
+		5192DDF0DFEF45F89EBFC945 = {isa = PBXBuildFile; fileRef = 80F993B116F3429180CCD59C; };
+		2411016A3A33402BBAD6C414 = {isa = PBXBuildFile; fileRef = AADEBEB313A440D6A7A61F41; };
+		2C9F3665D226422DB605E3A3 = {isa = PBXBuildFile; fileRef = 115953414F9B44EDA6E39DD5; };
+		F0C7AE8D9B864611801430BF = {isa = PBXBuildFile; fileRef = E138B0BEEBFE40DEADEC4055; };
+		279DE7105EA548F8A947AC46 = {isa = PBXBuildFile; fileRef = FAF0488054EB46F0A9E3D650; };
+		3EEA26F216504178B4205218 = {isa = PBXBuildFile; fileRef = EAA6622F7FAF4E8B9F63E6EA; };
+		FB84CC70C6074F5BB8DCE12D = {isa = PBXBuildFile; fileRef = C175A3764D8343CDA2630D60; };
+		D6DE86A8FB08483C9008638C = {isa = PBXBuildFile; fileRef = 974EAB7C07C74FA58826D070; };
+		F610D1AB6B304FE3A656EB7F = {isa = PBXBuildFile; fileRef = 337BDD3CE8B641D78A92B6B6; };
+		6D2D87E065684BB59A003AD3 = {isa = PBXBuildFile; fileRef = 7601DE9A4E09471A875777EE; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		7BC70238EDB04263A1D68413 = {
-			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.swift;
-			name = "CinemanaNewApp.swift";
-			path = "Sources/CinemanaNew/CinemanaNewApp.swift";
-			sourceTree = SOURCE_ROOT;
-		};
-		4945FFB0A0F346529F4F29CD = {
-			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.swift;
-			name = "Models.swift";
-			path = "Sources/CinemanaNew/Models.swift";
-			sourceTree = SOURCE_ROOT;
-		};
-		002A5A89C10441A29D242B5E = {
-			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.swift;
-			name = "APIService.swift";
-			path = "Sources/CinemanaNew/APIService.swift";
-			sourceTree = SOURCE_ROOT;
-		};
-		F0FED13D3799445FB3EA9372 = {
-			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.swift;
-			name = "DownloadManager.swift";
-			path = "Sources/CinemanaNew/DownloadManager.swift";
-			sourceTree = SOURCE_ROOT;
-		};
-		CFFEA2EAC4624E428BE51316 = {
-			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.swift;
-			name = "WatchLaterManager.swift";
-			path = "Sources/CinemanaNew/WatchLaterManager.swift";
-			sourceTree = SOURCE_ROOT;
-		};
-		7D29DAEE562545EAA1C722EF = {
-			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.swift;
-			name = "DesignSystem.swift";
-			path = "Sources/CinemanaNew/DesignSystem.swift";
-			sourceTree = SOURCE_ROOT;
-		};
-		A858334E496F4A1BB3AA0E26 = {
-			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.swift;
-			name = "HomeView.swift";
-			path = "Sources/CinemanaNew/HomeView.swift";
-			sourceTree = SOURCE_ROOT;
-		};
-		21F28B4F44A8466CBB2D2E90 = {
-			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.swift;
-			name = "DetailView.swift";
-			path = "Sources/CinemanaNew/DetailView.swift";
-			sourceTree = SOURCE_ROOT;
-		};
-		08BAFC0953164B8DB67D3772 = {
-			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.swift;
-			name = "PlayerView.swift";
-			path = "Sources/CinemanaNew/PlayerView.swift";
-			sourceTree = SOURCE_ROOT;
-		};
-		3A7610ABA2244206AD4D5C1E = {
-			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.swift;
-			name = "AllViews.swift";
-			path = "Sources/CinemanaNew/AllViews.swift";
-			sourceTree = SOURCE_ROOT;
-		};
-		4A4DD5631CB54FC9AAF15E1F = {
-			isa = PBXFileReference;
-			lastKnownFileType = folder.assetcatalog;
-			name = Assets.xcassets;
-			path = Assets.xcassets;
-			sourceTree = SOURCE_ROOT;
-		};
-		48AF193B672C4CCAB9E54423 = {
-			isa = PBXFileReference;
-			explicitFileType = wrapper.application;
-			includeInIndex = 0;
-			path = "CinemanaNew.app";
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
+		9BCBED8BF58541FD8F0B2B75 = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CinemanaNew.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4A8930EFBF96477F8AF75565 = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = Assets.xcassets; sourceTree = SOURCE_ROOT; };
+		80F993B116F3429180CCD59C = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "CinemanaNewApp.swift"; path = "Sources/CinemanaNew/CinemanaNewApp.swift"; sourceTree = SOURCE_ROOT; };
+		AADEBEB313A440D6A7A61F41 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Models.swift"; path = "Sources/CinemanaNew/Models.swift"; sourceTree = SOURCE_ROOT; };
+		115953414F9B44EDA6E39DD5 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "APIService.swift"; path = "Sources/CinemanaNew/APIService.swift"; sourceTree = SOURCE_ROOT; };
+		E138B0BEEBFE40DEADEC4055 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "DownloadManager.swift"; path = "Sources/CinemanaNew/DownloadManager.swift"; sourceTree = SOURCE_ROOT; };
+		FAF0488054EB46F0A9E3D650 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "WatchLaterManager.swift"; path = "Sources/CinemanaNew/WatchLaterManager.swift"; sourceTree = SOURCE_ROOT; };
+		EAA6622F7FAF4E8B9F63E6EA = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "DesignSystem.swift"; path = "Sources/CinemanaNew/DesignSystem.swift"; sourceTree = SOURCE_ROOT; };
+		C175A3764D8343CDA2630D60 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "HomeView.swift"; path = "Sources/CinemanaNew/HomeView.swift"; sourceTree = SOURCE_ROOT; };
+		974EAB7C07C74FA58826D070 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "DetailView.swift"; path = "Sources/CinemanaNew/DetailView.swift"; sourceTree = SOURCE_ROOT; };
+		337BDD3CE8B641D78A92B6B6 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "PlayerView.swift"; path = "Sources/CinemanaNew/PlayerView.swift"; sourceTree = SOURCE_ROOT; };
+		7601DE9A4E09471A875777EE = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "AllViews.swift"; path = "Sources/CinemanaNew/AllViews.swift"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		873D2F9415874F34ADD6CDFB = {
+		6DBEF93FE1AB43BABC484837 = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
-			files = ();
+			files = (
+			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		D4A7652E2B8D49D2B57EE63C = {
-			isa = PBXGroup;
-			children = (89D63F8117084A4688548083,4A4DD5631CB54FC9AAF15E1F,2FE2AA0A1E2543488AADEFD6);
-			sourceTree = "<group>";
-		};
-		89D63F8117084A4688548083 = {
+		D8F790DB6FC5401C9B63CDD6 = {
 			isa = PBXGroup;
 			children = (
-				7BC70238EDB04263A1D68413,
-				4945FFB0A0F346529F4F29CD,
-				002A5A89C10441A29D242B5E,
-				F0FED13D3799445FB3EA9372,
-				CFFEA2EAC4624E428BE51316,
-				7D29DAEE562545EAA1C722EF,
-				A858334E496F4A1BB3AA0E26,
-				21F28B4F44A8466CBB2D2E90,
-				08BAFC0953164B8DB67D3772,
-				3A7610ABA2244206AD4D5C1E,
+				AEE03D3AAB094E2385E0D7DF,
+				4A8930EFBF96477F8AF75565,
+				048DB860BF1644DA901BE718,
+			);
+			sourceTree = "<group>";
+		};
+		AEE03D3AAB094E2385E0D7DF = {
+			isa = PBXGroup;
+			children = (
+				80F993B116F3429180CCD59C,
+				AADEBEB313A440D6A7A61F41,
+				115953414F9B44EDA6E39DD5,
+				E138B0BEEBFE40DEADEC4055,
+				FAF0488054EB46F0A9E3D650,
+				EAA6622F7FAF4E8B9F63E6EA,
+				C175A3764D8343CDA2630D60,
+				974EAB7C07C74FA58826D070,
+				337BDD3CE8B641D78A92B6B6,
+				7601DE9A4E09471A875777EE,
 			);
 			name = Sources;
 			sourceTree = "<group>";
 		};
-		2FE2AA0A1E2543488AADEFD6 = {
+		048DB860BF1644DA901BE718 = {
 			isa = PBXGroup;
-			children = (48AF193B672C4CCAB9E54423);
+			children = (
+				9BCBED8BF58541FD8F0B2B75,
+			);
 			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		70F9086651104C62A8288696 = {
+		1366F5F6FC334E4AAF0D74C9 = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 93F0185474984C759B2A3E89;
-			buildPhases = (4B283FF6D1C144C3A7E110B6,7CE7E8793F3B4C9E98E40CE3,873D2F9415874F34ADD6CDFB);
-			buildRules = ();
-			dependencies = ();
+			buildConfigurationList = 01DF41EBD4994BA997B1F83B;
+			buildPhases = (
+				5C95FC04E67C4521A53E2A54,
+				E910A11885034ACF8907DA28,
+				6DBEF93FE1AB43BABC484837,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
 			name = CinemanaNew;
 			productName = CinemanaNew;
-			productReference = 48AF193B672C4CCAB9E54423;
+			productReference = 9BCBED8BF58541FD8F0B2B75;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		50A28642A89D44E2B5EC5BB6 = {
+		CFEDCBF8AD304DBEBE291B28 = {
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1500;
 				LastUpgradeCheck = 1500;
-				TargetAttributes = {70F9086651104C62A8288696 = {CreatedOnToolsVersion = 15.0;}};
+				TargetAttributes = {
+					1366F5F6FC334E4AAF0D74C9 = {
+						CreatedOnToolsVersion = 15.0;
+					};
+				};
 			};
-			buildConfigurationList = D328632858344F889D843100;
+			buildConfigurationList = 9090D357141D4F71BAA542C1;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
-			knownRegions = (en, ar, Base);
-			mainGroup = D4A7652E2B8D49D2B57EE63C;
-			productRefGroup = 2FE2AA0A1E2543488AADEFD6;
+			knownRegions = (
+				en,
+				ar,
+				Base,
+			);
+			mainGroup = D8F790DB6FC5401C9B63CDD6;
+			productRefGroup = 048DB860BF1644DA901BE718;
 			projectDirPath = "";
 			projectRoot = "";
-			targets = (70F9086651104C62A8288696);
+			targets = (
+				1366F5F6FC334E4AAF0D74C9,
+			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		7CE7E8793F3B4C9E98E40CE3 = {
+		E910A11885034ACF8907DA28 = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
-			files = (42DAAA07028D4AA59804ABF6);
+			files = (
+				A30D49AFB1CF48F8A4A87317 /* Assets.xcassets */,
+			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		4B283FF6D1C144C3A7E110B6 = {
+		5C95FC04E67C4521A53E2A54 = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B196587652DF4EDFA308C62D /* CinemanaNewApp.swift */,
-				017E7B4869AA4841B85E99ED /* Models.swift */,
-				7921CE16C6F34CC0BEB3F49C /* APIService.swift */,
-				F9EFE8DBEE8D4DA09C3C03EF /* DownloadManager.swift */,
-				D29D3E07698D4ED89794351F /* WatchLaterManager.swift */,
-				0510C89274C043309DC0AD1C /* DesignSystem.swift */,
-				FA399EDAC96041A29C6C4AE9 /* HomeView.swift */,
-				81F382AFB8B240D0A19B7E97 /* DetailView.swift */,
-				E19EEE377A754C38B08FC56C /* PlayerView.swift */,
-				22394BEA97324A388699D261 /* AllViews.swift */,
+				5192DDF0DFEF45F89EBFC945 /* CinemanaNewApp.swift */,
+				2411016A3A33402BBAD6C414 /* Models.swift */,
+				2C9F3665D226422DB605E3A3 /* APIService.swift */,
+				F0C7AE8D9B864611801430BF /* DownloadManager.swift */,
+				279DE7105EA548F8A947AC46 /* WatchLaterManager.swift */,
+				3EEA26F216504178B4205218 /* DesignSystem.swift */,
+				FB84CC70C6074F5BB8DCE12D /* HomeView.swift */,
+				D6DE86A8FB08483C9008638C /* DetailView.swift */,
+				F610D1AB6B304FE3A656EB7F /* PlayerView.swift */,
+				6D2D87E065684BB59A003AD3 /* AllViews.swift */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		AB56FFDCAD1B4D96B3979EA0 = {
+		857476BDF950411380B42E51 = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -222,7 +176,6 @@
 				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "Cinemana New";
-				INFOPLIST_KEY_NSAppTransportSecurity = "<dict><key>NSAllowsArbitraryLoads</key><true/></dict>";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -240,7 +193,7 @@
 			};
 			name = Debug;
 		};
-		FA7293218EBA4BDD96F0DC1F = {
+		4A67D9DE04754DED8501DED6 = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -250,7 +203,6 @@
 				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "Cinemana New";
-				INFOPLIST_KEY_NSAppTransportSecurity = "<dict><key>NSAllowsArbitraryLoads</key><true/></dict>";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -269,7 +221,7 @@
 			};
 			name = Release;
 		};
-		2E13F2911143460DBB03C7E6 = {
+		6E8D8B2C45BD4F6E954E7DB7 = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -279,17 +231,15 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = ("DEBUG=1","$(inherited)");
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
-		B74FEC1A2C7C4A24A28FCC98 = {
+		0D502DE4AE6F43FFAE24F0D1 = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -311,19 +261,25 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		D328632858344F889D843100 = {
+		9090D357141D4F71BAA542C1 = {
 			isa = XCConfigurationList;
-			buildConfigurations = (2E13F2911143460DBB03C7E6,B74FEC1A2C7C4A24A28FCC98);
+			buildConfigurations = (
+				6E8D8B2C45BD4F6E954E7DB7 /* Debug */,
+				0D502DE4AE6F43FFAE24F0D1 /* Release */,
+			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		93F0185474984C759B2A3E89 = {
+		01DF41EBD4994BA997B1F83B = {
 			isa = XCConfigurationList;
-			buildConfigurations = (AB56FFDCAD1B4D96B3979EA0,FA7293218EBA4BDD96F0DC1F);
+			buildConfigurations = (
+				857476BDF950411380B42E51 /* Debug */,
+				4A67D9DE04754DED8501DED6 /* Release */,
+			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 50A28642A89D44E2B5EC5BB6;
+	rootObject = CFEDCBF8AD304DBEBE291B28 /* Project object */;
 }
