@@ -9,9 +9,8 @@ struct VideoDetailView: View {
     @State private var selectedQuality: String = "720"
     
     init(video: VideoModel) {
+        self.video = video
         self._viewModel = StateObject(wrappedValue: VideoDetailViewModel(video: video))
-        self._showPlayer = State(wrappedValue: false)
-        self._selectedQuality = State(wrappedValue: "720")
     }
     
     var body: some View {
