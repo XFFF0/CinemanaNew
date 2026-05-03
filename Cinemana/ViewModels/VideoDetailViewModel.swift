@@ -118,4 +118,17 @@ class VideoDetailViewModel: ObservableObject {
             print("Error adding to history: \(error)")
         }
     }
+
+    func downloadVideo(_ video: VideoModel, quality: String) {
+        guard let file = transcodeFiles.first(where: { $0.resolution == quality }) else {
+            print("No file found for quality: \(quality)")
+            return
+        }
+        
+        DownloadManager.shared.startDownload(video: video, file: file)
+    }
+
+    func checkFavorite(_ video: VideoModel) -> Bool {
+        return WatchLaterManager.shared.isInWatchLater(videoId: video.nb)
+    }
 }
