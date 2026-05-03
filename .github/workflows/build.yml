@@ -30,7 +30,7 @@ jobs:
         xcodebuild -project CinemanaNew.xcodeproj \
           -scheme CinemanaNew \
           -configuration Debug \
-          -destination 'platform=iOS Simulator,name=iPhone 15' \
+          -destination 'platform=iOS Simulator,name=iPhone 16' \
           build
     
     - name: Build IPA
