@@ -1,0 +1,61 @@
+name: Build iOS IPA
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-latest
+    
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+    
+    - name: Select Xcode
+      run: sudo xcode-select -s /Applications/Xcode.app/Contents/Developer
+    
+    - name: Install XcodeGen
+      run: brew install xcodegen
+    
+    - name: Generate Xcode project
+      run: xcodegen generate
+    
+    - name: Resolve Swift Package Manager dependencies
+      run: xcodebuild -resolvePackageDependencies -project CinemanaNew.xcodeproj -scheme CinemanaNew
+    
+    - name: Build for iOS Simulator
+      run: |
+        xcodebuild -project CinemanaNew.xcodeproj \
+          -scheme CinemanaNew \
+          -configuration Debug \
+          -destination 'platform=iOS Simulator,name=iPhone 15' \
+          build
+    
+    - name: Build IPA
+      run: |
+        xcodebuild -project CinemanaNew.xcodeproj \
+          -scheme CinemanaNew \
+          -configuration Release \
+          -destination 'generic/platform=iOS' \
+          -archivePath ./CinemanaNew.xcarchive \
+          archive
+        
+        xcodebuild -exportArchive \
+          -archivePath ./CinemanaNew.xcarchive \
+          -exportOptionsPlist ExportOptions.plist \
+          -exportPath ./output
+    
+    - name: Upload IPA
+      uses: actions/upload-artifact@v4
+      with:
+        name: CinemanaNew-IPA
+        path: ./output/CinemanaNew.ipa
+    
+    - name: Upload Debug Symbols
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: Debug-Symbols
+        path: ./CinemanaNew.xcarchive/dSYMs
