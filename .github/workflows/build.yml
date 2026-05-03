@@ -1,0 +1,98 @@
+name: Build Cinemana New IPA
+
+on:
+  push:
+    branches: [main, master]
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build IPA
+    runs-on: macos-14
+    timeout-minutes: 60
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Select Xcode 15
+        run: sudo xcode-select -s /Applications/Xcode_15.4.app
+
+      - name: Verify structure
+        run: |
+          echo "Root files:"
+          ls -la
+          echo "Swift files:"
+          find Sources -name "*.swift" | sort
+          echo "Assets:"
+          ls Assets.xcassets/
+          ls Assets.xcassets/AppIcon.appiconset/ | head -5
+          echo "Scheme list:"
+          xcodebuild -project CinemanaNew.xcodeproj -list
+
+      - name: Cache DerivedData
+        uses: actions/cache@v4
+        with:
+          path: ~/Library/Developer/Xcode/DerivedData
+          key: ${{ runner.os }}-dd-${{ hashFiles('**/*.swift') }}
+          restore-keys: ${{ runner.os }}-dd-
+
+      - name: Build archive
+        run: |
+          xcodebuild \
+            -project CinemanaNew.xcodeproj \
+            -scheme CinemanaNew \
+            -configuration Release \
+            -destination "generic/platform=iOS" \
+            -archivePath $RUNNER_TEMP/CinemanaNew.xcarchive \
+            CODE_SIGNING_ALLOWED=NO \
+            CODE_SIGN_IDENTITY="" \
+            CODE_SIGNING_REQUIRED=NO \
+            ONLY_ACTIVE_ARCH=NO \
+            SWIFT_OPTIMIZATION_LEVEL="-Onone" \
+            clean archive 2>&1 | tee /tmp/build.log
+          STATUS=${PIPESTATUS[0]}
+          if [ $STATUS -ne 0 ]; then
+            echo "=== BUILD ERRORS ==="
+            grep "error:" /tmp/build.log | head -40
+            exit 1
+          fi
+
+      - name: Package IPA
+        run: |
+          APP=$(find $RUNNER_TEMP/CinemanaNew.xcarchive -name "*.app" | head -1)
+          echo "App: $APP"
+          mkdir -p /tmp/Payload
+          cp -r "$APP" /tmp/Payload/CinemanaNew.app
+          cd /tmp && zip -r CinemanaNew_unsigned.ipa Payload/
+          echo "Size: $(du -sh /tmp/CinemanaNew_unsigned.ipa | cut -f1)"
+
+      - name: Upload IPA
+        uses: actions/upload-artifact@v4
+        with:
+          name: CinemanaNew-IPA-${{ github.run_number }}
+          path: /tmp/CinemanaNew_unsigned.ipa
+          retention-days: 30
+
+      - name: Upload dSYMs
+        uses: actions/upload-artifact@v4
+        with:
+          name: CinemanaNew-dSYMs-${{ github.run_number }}
+          path: ${{ runner.temp }}/CinemanaNew.xcarchive/dSYMs/
+          retention-days: 15
+          if-no-files-found: ignore
+
+      - name: Summary
+        if: always()
+        run: |
+          echo "## Cinemana New Build" >> $GITHUB_STEP_SUMMARY
+          echo "| Key | Value |" >> $GITHUB_STEP_SUMMARY
+          echo "|-----|-------|" >> $GITHUB_STEP_SUMMARY
+          echo "| Bundle ID | com.shabakaty.cinemanaa |" >> $GITHUB_STEP_SUMMARY
+          echo "| API Base | https://cinemana.shabakaty.com |" >> $GITHUB_STEP_SUMMARY
+          echo "| Version | 2.0 |" >> $GITHUB_STEP_SUMMARY
+          echo "| iOS Target | 17.0+ |" >> $GITHUB_STEP_SUMMARY
+          echo "| Build | ${{ github.run_number }} |" >> $GITHUB_STEP_SUMMARY
+          if [ -f /tmp/CinemanaNew_unsigned.ipa ]; then
+            echo "| IPA | $(du -sh /tmp/CinemanaNew_unsigned.ipa | cut -f1) |" >> $GITHUB_STEP_SUMMARY
+          fi
