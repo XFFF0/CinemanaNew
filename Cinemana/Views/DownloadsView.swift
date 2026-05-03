@@ -197,8 +197,6 @@ struct LocalPlayerView: View {
     }
 }
 
-extension DownloadedVideo: Identifiable {}
-
 #Preview {
     DownloadsView()
         .preferredColorScheme(.dark)
