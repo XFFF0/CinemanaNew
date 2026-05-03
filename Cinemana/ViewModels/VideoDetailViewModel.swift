@@ -1,3 +1,4 @@
+// Cinemana/ViewModels/VideoDetailViewModel.swift
 import Foundation
 import Combine
 
@@ -121,12 +122,7 @@ class VideoDetailViewModel: ObservableObject {
     }
 
     func downloadVideo(_ video: VideoModel, quality: String) {
-        guard let file = transcodeFiles.first(where: { $0.resolution == quality }) else {
-            print("No file found for quality: \(quality)")
-            return
-        }
-        
-        DownloadManager.shared.startDownload(video: video, file: file)
+        DownloadManager.shared.downloadVideo(video, quality: quality)
     }
 
     func checkFavorite(_ video: VideoModel) -> Bool {
@@ -137,7 +133,7 @@ class VideoDetailViewModel: ObservableObject {
         if isFavorite {
             WatchLaterManager.shared.removeFromWatchLater(videoId: video.nb)
         } else {
-            WatchLaterManager.shared.addToWatchLater(video: video)
+            WatchLaterManager.shared.addToWatchLater(video)
         }
         isFavorite.toggle()
     }
