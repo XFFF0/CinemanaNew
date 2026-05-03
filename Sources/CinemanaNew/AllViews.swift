@@ -473,7 +473,7 @@ struct LoginView: View {
                     // Form
                     VStack(spacing: 14) {
                         Field(icon: "envelope", placeholder: "Email", text: $email,
-                              keyboard: .emailAddress, autocap: .none)
+                              keyboard: .emailAddress, autocap: .never)
 
                         PasswordField(placeholder: "Password", text: $password, show: $showPass)
 

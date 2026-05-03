@@ -113,11 +113,12 @@ class PlayerVM: ObservableObject {
     private func parseTime(_ s: String) -> Double {
         let clean = s.trimmingCharacters(in: .whitespaces)
         let parts = clean.components(separatedBy: ":")
-        if parts.count == 3 {
-            return (Double(parts[0]) ?? 0) * 3600 + (Double(parts[1]) ?? 0) * 60
-                + (Double(parts[2].replacingOccurrences(of: ",", with: ".")) ?? 0)
-        }
-        return 0
+        guard parts.count == 3 else { return 0 }
+        let hours = Double(parts[0]) ?? 0
+        let minutes = Double(parts[1]) ?? 0
+        let secondsStr = parts[2].replacingOccurrences(of: ",", with: ".")
+        let seconds = Double(secondsStr) ?? 0
+        return hours * 3600 + minutes * 60 + seconds
     }
 
     private func updateSub() {

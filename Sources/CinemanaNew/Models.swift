@@ -92,6 +92,29 @@ struct Video: Codable, Identifiable, Hashable {
 
     static func == (l: Video, r: Video) -> Bool { l.id == r.id }
     func hash(into h: inout Hasher) { h.combine(id) }
+
+    init(id: String, title: String? = nil, arabicTitle: String? = nil, englishTitle: String? = nil,
+         description: String? = nil, arabicDescription: String? = nil, poster: String? = nil,
+         thumbnail: String? = nil, banner: String? = nil, year: String? = nil, rating: Double? = nil,
+         type: String? = nil, duration: String? = nil, views: String? = nil, isHd: String? = nil,
+         categoryId: String? = nil) {
+        self.id = id
+        self.title = title
+        self.arabicTitle = arabicTitle
+        self.englishTitle = englishTitle
+        self.description = description
+        self.arabicDescription = arabicDescription
+        self.poster = poster
+        self.thumbnail = thumbnail
+        self.banner = banner
+        self.year = year
+        self.rating = rating
+        self.type = type
+        self.duration = duration
+        self.views = views
+        self.isHd = isHd
+        self.categoryId = categoryId
+    }
 }
 
 // MARK: - Banner
