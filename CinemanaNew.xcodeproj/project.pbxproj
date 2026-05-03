@@ -1,0 +1,329 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		B196587652DF4EDFA308C62D = {isa = PBXBuildFile; fileRef = 7BC70238EDB04263A1D68413; };
+		017E7B4869AA4841B85E99ED = {isa = PBXBuildFile; fileRef = 4945FFB0A0F346529F4F29CD; };
+		7921CE16C6F34CC0BEB3F49C = {isa = PBXBuildFile; fileRef = 002A5A89C10441A29D242B5E; };
+		F9EFE8DBEE8D4DA09C3C03EF = {isa = PBXBuildFile; fileRef = F0FED13D3799445FB3EA9372; };
+		D29D3E07698D4ED89794351F = {isa = PBXBuildFile; fileRef = CFFEA2EAC4624E428BE51316; };
+		0510C89274C043309DC0AD1C = {isa = PBXBuildFile; fileRef = 7D29DAEE562545EAA1C722EF; };
+		FA399EDAC96041A29C6C4AE9 = {isa = PBXBuildFile; fileRef = A858334E496F4A1BB3AA0E26; };
+		81F382AFB8B240D0A19B7E97 = {isa = PBXBuildFile; fileRef = 21F28B4F44A8466CBB2D2E90; };
+		E19EEE377A754C38B08FC56C = {isa = PBXBuildFile; fileRef = 08BAFC0953164B8DB67D3772; };
+		22394BEA97324A388699D261 = {isa = PBXBuildFile; fileRef = 3A7610ABA2244206AD4D5C1E; };
+		42DAAA07028D4AA59804ABF6 = {isa = PBXBuildFile; fileRef = 4A4DD5631CB54FC9AAF15E1F; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		7BC70238EDB04263A1D68413 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			name = "CinemanaNewApp.swift";
+			path = "Sources/CinemanaNew/CinemanaNewApp.swift";
+			sourceTree = SOURCE_ROOT;
+		};
+		4945FFB0A0F346529F4F29CD = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			name = "Models.swift";
+			path = "Sources/CinemanaNew/Models.swift";
+			sourceTree = SOURCE_ROOT;
+		};
+		002A5A89C10441A29D242B5E = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			name = "APIService.swift";
+			path = "Sources/CinemanaNew/APIService.swift";
+			sourceTree = SOURCE_ROOT;
+		};
+		F0FED13D3799445FB3EA9372 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			name = "DownloadManager.swift";
+			path = "Sources/CinemanaNew/DownloadManager.swift";
+			sourceTree = SOURCE_ROOT;
+		};
+		CFFEA2EAC4624E428BE51316 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			name = "WatchLaterManager.swift";
+			path = "Sources/CinemanaNew/WatchLaterManager.swift";
+			sourceTree = SOURCE_ROOT;
+		};
+		7D29DAEE562545EAA1C722EF = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			name = "DesignSystem.swift";
+			path = "Sources/CinemanaNew/DesignSystem.swift";
+			sourceTree = SOURCE_ROOT;
+		};
+		A858334E496F4A1BB3AA0E26 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			name = "HomeView.swift";
+			path = "Sources/CinemanaNew/HomeView.swift";
+			sourceTree = SOURCE_ROOT;
+		};
+		21F28B4F44A8466CBB2D2E90 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			name = "DetailView.swift";
+			path = "Sources/CinemanaNew/DetailView.swift";
+			sourceTree = SOURCE_ROOT;
+		};
+		08BAFC0953164B8DB67D3772 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			name = "PlayerView.swift";
+			path = "Sources/CinemanaNew/PlayerView.swift";
+			sourceTree = SOURCE_ROOT;
+		};
+		3A7610ABA2244206AD4D5C1E = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			name = "AllViews.swift";
+			path = "Sources/CinemanaNew/AllViews.swift";
+			sourceTree = SOURCE_ROOT;
+		};
+		4A4DD5631CB54FC9AAF15E1F = {
+			isa = PBXFileReference;
+			lastKnownFileType = folder.assetcatalog;
+			name = Assets.xcassets;
+			path = Assets.xcassets;
+			sourceTree = SOURCE_ROOT;
+		};
+		48AF193B672C4CCAB9E54423 = {
+			isa = PBXFileReference;
+			explicitFileType = wrapper.application;
+			includeInIndex = 0;
+			path = "CinemanaNew.app";
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		873D2F9415874F34ADD6CDFB = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = ();
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		D4A7652E2B8D49D2B57EE63C = {
+			isa = PBXGroup;
+			children = (89D63F8117084A4688548083,4A4DD5631CB54FC9AAF15E1F,2FE2AA0A1E2543488AADEFD6);
+			sourceTree = "<group>";
+		};
+		89D63F8117084A4688548083 = {
+			isa = PBXGroup;
+			children = (
+				7BC70238EDB04263A1D68413,
+				4945FFB0A0F346529F4F29CD,
+				002A5A89C10441A29D242B5E,
+				F0FED13D3799445FB3EA9372,
+				CFFEA2EAC4624E428BE51316,
+				7D29DAEE562545EAA1C722EF,
+				A858334E496F4A1BB3AA0E26,
+				21F28B4F44A8466CBB2D2E90,
+				08BAFC0953164B8DB67D3772,
+				3A7610ABA2244206AD4D5C1E,
+			);
+			name = Sources;
+			sourceTree = "<group>";
+		};
+		2FE2AA0A1E2543488AADEFD6 = {
+			isa = PBXGroup;
+			children = (48AF193B672C4CCAB9E54423);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		70F9086651104C62A8288696 = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 93F0185474984C759B2A3E89;
+			buildPhases = (4B283FF6D1C144C3A7E110B6,7CE7E8793F3B4C9E98E40CE3,873D2F9415874F34ADD6CDFB);
+			buildRules = ();
+			dependencies = ();
+			name = CinemanaNew;
+			productName = CinemanaNew;
+			productReference = 48AF193B672C4CCAB9E54423;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		50A28642A89D44E2B5EC5BB6 = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1500;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = {70F9086651104C62A8288696 = {CreatedOnToolsVersion = 15.0;}};
+			};
+			buildConfigurationList = D328632858344F889D843100;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (en, ar, Base);
+			mainGroup = D4A7652E2B8D49D2B57EE63C;
+			productRefGroup = 2FE2AA0A1E2543488AADEFD6;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (70F9086651104C62A8288696);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		7CE7E8793F3B4C9E98E40CE3 = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (42DAAA07028D4AA59804ABF6);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		4B283FF6D1C144C3A7E110B6 = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B196587652DF4EDFA308C62D /* CinemanaNewApp.swift */,
+				017E7B4869AA4841B85E99ED /* Models.swift */,
+				7921CE16C6F34CC0BEB3F49C /* APIService.swift */,
+				F9EFE8DBEE8D4DA09C3C03EF /* DownloadManager.swift */,
+				D29D3E07698D4ED89794351F /* WatchLaterManager.swift */,
+				0510C89274C043309DC0AD1C /* DesignSystem.swift */,
+				FA399EDAC96041A29C6C4AE9 /* HomeView.swift */,
+				81F382AFB8B240D0A19B7E97 /* DetailView.swift */,
+				E19EEE377A754C38B08FC56C /* PlayerView.swift */,
+				22394BEA97324A388699D261 /* AllViews.swift */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		AB56FFDCAD1B4D96B3979EA0 = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Cinemana New";
+				INFOPLIST_KEY_NSAppTransportSecurity = "<dict><key>NSAllowsArbitraryLoads</key><true/></dict>";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
+				MARKETING_VERSION = 2.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.shabakaty.cinemanaa";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		FA7293218EBA4BDD96F0DC1F = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Cinemana New";
+				INFOPLIST_KEY_NSAppTransportSecurity = "<dict><key>NSAllowsArbitraryLoads</key><true/></dict>";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
+				MARKETING_VERSION = 2.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.shabakaty.cinemanaa";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		2E13F2911143460DBB03C7E6 = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("DEBUG=1","$(inherited)");
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		B74FEC1A2C7C4A24A28FCC98 = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		D328632858344F889D843100 = {
+			isa = XCConfigurationList;
+			buildConfigurations = (2E13F2911143460DBB03C7E6,B74FEC1A2C7C4A24A28FCC98);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		93F0185474984C759B2A3E89 = {
+			isa = XCConfigurationList;
+			buildConfigurations = (AB56FFDCAD1B4D96B3979EA0,FA7293218EBA4BDD96F0DC1F);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 50A28642A89D44E2B5EC5BB6;
+}
