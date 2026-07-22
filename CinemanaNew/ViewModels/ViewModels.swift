@@ -22,7 +22,7 @@ final class HomeViewModel: ObservableObject {
             newlyAdded = try await newlyTask
             groups = try await groupsTask
         } catch {
-            errorMessage = "تعذر تحميل الصفحة الرئيسية"
+            errorMessage = (error as? APIError)?.description ?? "\(error)"
         }
         isLoading = false
     }

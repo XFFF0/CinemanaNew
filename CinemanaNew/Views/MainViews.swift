@@ -37,6 +37,18 @@ struct HomeView: View {
             ScrollView {
                 if vm.isLoading {
                     ProgressView().padding(.top, 60)
+                } else if let error = vm.errorMessage {
+                    VStack(spacing: 12) {
+                        Image(systemName: "exclamationmark.triangle")
+                            .font(.largeTitle)
+                            .foregroundStyle(.orange)
+                        Text(error)
+                            .font(.footnote)
+                            .multilineTextAlignment(.center)
+                            .padding()
+                        Button("إعادة المحاولة") { Task { await vm.load() } }
+                    }
+                    .padding(.top, 60)
                 } else {
                     VStack(alignment: .leading, spacing: 20) {
                         if !vm.banners.isEmpty {

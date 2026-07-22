@@ -1,10 +1,19 @@
 import Foundation
 
-enum APIError: Error {
+enum APIError: Error, CustomStringConvertible {
     case invalidURL
-    case server(Int)
-    case decoding(Error)
+    case server(Int, String)
+    case decoding(Error, String)
     case network(Error)
+
+    var description: String {
+        switch self {
+        case .invalidURL: return "رابط غير صالح"
+        case .server(let code, let body): return "خطأ سيرفر (\(code)): \(body.prefix(300))"
+        case .decoding(let err, let body): return "خطأ بتحليل البيانات: \(err.localizedDescription)\nالرد الخام: \(body.prefix(300))"
+        case .network(let err): return "خطأ شبكة: \(err.localizedDescription)"
+        }
+    }
 }
 
 enum HTTPMethod: String { case get = "GET", post = "POST", patch = "PATCH" }
@@ -57,11 +66,16 @@ final class APIClient {
         do {
             let (data, response) = try await session.data(for: req)
             guard let http = response as? HTTPURLResponse else { throw APIError.network(URLError(.badServerResponse)) }
-            guard (200..<300).contains(http.statusCode) else { throw APIError.server(http.statusCode) }
+            let rawBody = String(data: data, encoding: .utf8) ?? "<non-utf8, \(data.count) bytes>"
+            #if DEBUG
+            print("➡️ \(method.rawValue) \(url.absoluteString)")
+            print("⬅️ [\(http.statusCode)] \(rawBody.prefix(500))")
+            #endif
+            guard (200..<300).contains(http.statusCode) else { throw APIError.server(http.statusCode, rawBody) }
             do {
                 return try JSONDecoder().decode(T.self, from: data)
             } catch {
-                throw APIError.decoding(error)
+                throw APIError.decoding(error, rawBody)
             }
         } catch let error as APIError {
             throw error
