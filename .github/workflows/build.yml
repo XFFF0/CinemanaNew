@@ -1,0 +1,43 @@
+name: Build Unsigned IPA
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Select Xcode 16
+        run: sudo xcode-select -s /Applications/Xcode_16.app/Contents/Developer
+
+      - name: Generate Xcode project
+        run: python3 scripts/generate_project.py
+
+      - name: Build (unsigned, for simulator/device generic archive)
+        run: |
+          xcodebuild -project CinemanaNew.xcodeproj \
+            -scheme CinemanaNew \
+            -configuration Release \
+            -sdk iphoneos \
+            -derivedDataPath build \
+            CODE_SIGNING_ALLOWED=NO \
+            CODE_SIGNING_REQUIRED=NO \
+            clean build
+
+      - name: Package unsigned IPA
+        run: |
+          mkdir -p Payload
+          cp -r build/Build/Products/Release-iphoneos/CinemanaNew.app Payload/
+          zip -r CinemanaNew-unsigned.ipa Payload
+
+      - name: Upload IPA artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: CinemanaNew-unsigned-ipa
+          path: CinemanaNew-unsigned.ipa
+          retention-days: 14
