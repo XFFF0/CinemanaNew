@@ -124,27 +124,27 @@ extension Banner: Identifiable {
 }
 
 struct VideoGroup: Decodable, Hashable, Identifiable {
-    let groupID: String?
     let name: String?
     let items: [VideoModel]?
-    var id: String { groupID ?? name ?? UUID().uuidString }
+    var id: String { name ?? UUID().uuidString }
 
     private enum CodingKeys: String, CodingKey {
-        case groupID = "groupID"
-        case groupIDAlt = "groupId"
-        case groupIDSnake = "group_id"
-        case name, items
+        case title, name, content, items
     }
 
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        let direct = try container.decodeIfPresent(String.self, forKey: .groupID)
-        let alt = try container.decodeIfPresent(String.self, forKey: .groupIDAlt)
-        let snake = try container.decodeIfPresent(String.self, forKey: .groupIDSnake)
-        self.groupID = direct ?? alt ?? snake
-        self.name = try container.decodeIfPresent(String.self, forKey: .name)
-        self.items = try container.decodeIfPresent([VideoModel].self, forKey: .items)
+        self.name = try container.decodeIfPresent(String.self, forKey: .title)
+            ?? container.decodeIfPresent(String.self, forKey: .name)
+        self.items = try container.decodeIfPresent([VideoModel].self, forKey: .content)
+            ?? container.decodeIfPresent([VideoModel].self, forKey: .items)
     }
+}
+
+/// The videoGroups endpoint wraps the array as {"groups": [...]} rather than
+/// returning a bare array.
+struct VideoGroupsResponse: Decodable {
+    let groups: [VideoGroup]
 }
 
 struct VideoComment: Codable, Hashable, Identifiable {

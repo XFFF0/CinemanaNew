@@ -89,7 +89,8 @@ final class APIClient {
     // MARK: - Home / Discovery
 
     func videoGroups(language: String, level: String) async throws -> [VideoGroup] {
-        try await request("videoGroups/lang/\(language)/level/\(level)")
+        let response: VideoGroupsResponse = try await request("videoGroups/lang/\(language)/level/\(level)")
+        return response.groups
     }
 
     func banners(level: String) async throws -> [Banner] {
