@@ -93,7 +93,7 @@ struct VideoRow: View {
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 12) {
                     ForEach(videos) { video in
-                        NavigationLink(value: video.nb) {
+                        NavigationLink(value: video.id) {
                             VideoPoster(video: video)
                         }
                     }
@@ -156,7 +156,7 @@ struct SearchView: View {
     var body: some View {
         NavigationStack {
             List(vm.results) { video in
-                NavigationLink(destination: VideoDetailView(videoId: video.nb)) {
+                NavigationLink(destination: VideoDetailView(videoId: video.id)) {
                     HStack {
                         AsyncImage(url: URL(string: video.imgThumbObjUrl ?? "")) { $0.resizable().scaledToFill() } placeholder: { Color.gray.opacity(0.2) }
                             .frame(width: 50, height: 70)
@@ -168,7 +168,7 @@ struct SearchView: View {
                     }
                 }
                 .onAppear {
-                    if video.nb == vm.results.last?.nb {
+                    if video.id == vm.results.last?.id {
                         Task { await vm.loadMore() }
                     }
                 }

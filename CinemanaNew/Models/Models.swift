@@ -23,8 +23,8 @@ struct APIEnvelope<T: Decodable>: Decodable {
 // MARK: - Video
 
 struct VideoModel: Codable, Identifiable, Hashable {
-    var id: String { nb }
-    let nb: String
+    var id: String { nb ?? UUID().uuidString }
+    let nb: String?
     let enTitle: String?
     let arTitle: String?
     var title: String { arTitle ?? enTitle ?? "" }
@@ -95,13 +95,13 @@ struct PersonInfo: Codable, Hashable, Identifiable {
 }
 
 struct Category: Codable, Hashable, Identifiable {
-    let id: String
+    let id: String?
     let name: String?
     let imgUrl: String?
 }
 
 struct CollectionModel: Codable, Hashable, Identifiable {
-    let id: String
+    let id: String?
     let name: String?
     let imgUrl: String?
 }
@@ -124,14 +124,31 @@ extension Banner: Identifiable {
 }
 
 struct VideoGroup: Codable, Hashable, Identifiable {
-    let groupID: String
+    let groupID: String?
     let name: String?
     let items: [VideoModel]?
-    var id: String { groupID }
+    var id: String { groupID ?? name ?? UUID().uuidString }
+
+    private enum CodingKeys: String, CodingKey {
+        case groupID = "groupID"
+        case groupIDAlt = "groupId"
+        case groupIDSnake = "group_id"
+        case name, items
+    }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        let direct = try container.decodeIfPresent(String.self, forKey: .groupID)
+        let alt = try container.decodeIfPresent(String.self, forKey: .groupIDAlt)
+        let snake = try container.decodeIfPresent(String.self, forKey: .groupIDSnake)
+        self.groupID = direct ?? alt ?? snake
+        self.name = try container.decodeIfPresent(String.self, forKey: .name)
+        self.items = try container.decodeIfPresent([VideoModel].self, forKey: .items)
+    }
 }
 
 struct VideoComment: Codable, Hashable, Identifiable {
-    let id: String
+    let id: String?
     let userId: String?
     let comment: String?
     let userName: String?
