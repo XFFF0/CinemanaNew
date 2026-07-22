@@ -20,6 +20,7 @@ jobs:
 
       - name: Build (unsigned, for simulator/device generic archive)
         run: |
+          set -o pipefail
           xcodebuild -project CinemanaNew.xcodeproj \
             -scheme CinemanaNew \
             -configuration Release \
@@ -27,7 +28,23 @@ jobs:
             -derivedDataPath build \
             CODE_SIGNING_ALLOWED=NO \
             CODE_SIGNING_REQUIRED=NO \
-            clean build
+            clean build 2>&1 | tee build_log.txt
+
+      - name: Publish build log to orphan branch (always, for debugging)
+        if: always()
+        run: |
+          git config user.email "ci@cinemananew.local"
+          git config user.name "CI Bot"
+          mkdir -p /tmp/logs-worktree
+          cp build_log.txt /tmp/build_log.txt || echo "no log" > /tmp/build_log.txt
+          cd /tmp/logs-worktree
+          git init -q
+          git checkout -q --orphan build-logs
+          cp /tmp/build_log.txt ./build_log.txt
+          git add build_log.txt
+          git commit -q -m "Build log for run ${{ github.run_id }}"
+          git remote add origin https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git
+          git push -f origin build-logs
 
       - name: Package unsigned IPA
         run: |
