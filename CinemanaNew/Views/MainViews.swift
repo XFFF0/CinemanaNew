@@ -79,6 +79,9 @@ struct HomeView: View {
             .navigationTitle("Cinemana")
             .task { await vm.load() }
             .refreshable { await vm.load() }
+            .navigationDestination(for: String.self) { id in
+                VideoDetailView(videoId: id)
+            }
         }
     }
 }
@@ -100,9 +103,6 @@ struct VideoRow: View {
                 }
                 .padding(.horizontal)
             }
-        }
-        .navigationDestination(for: String.self) { id in
-            VideoDetailView(videoId: id)
         }
     }
 }
@@ -176,6 +176,9 @@ struct SearchView: View {
             .searchable(text: $vm.query)
             .onSubmit(of: .search) { Task { await vm.search() } }
             .navigationTitle("بحث")
+            .navigationDestination(for: String.self) { id in
+                VideoDetailView(videoId: id)
+            }
         }
     }
 }
