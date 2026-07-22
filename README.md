@@ -5,7 +5,7 @@ reverse-engineered API documentation (`docs/cinemana-api.md`,
 `docs/cinemana-reverse-engineering.md`).
 
 ## Stack
-- SwiftUI, iOS 15+, MVVM
+- SwiftUI, iOS 16+, MVVM
 - `URLSession` + async/await networking (`Services/APIClient.swift`)
 - OAuth2 auth against `account.shabakaty.com` with Keychain token storage (`Services/AuthService.swift`)
 - `AVPlayer`-based video playback with intro/recap skip support
