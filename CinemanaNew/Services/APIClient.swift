@@ -73,7 +73,9 @@ final class APIClient {
             #endif
             guard (200..<300).contains(http.statusCode) else { throw APIError.server(http.statusCode, rawBody) }
             do {
-                return try JSONDecoder().decode(T.self, from: data)
+                let decoder = JSONDecoder()
+                decoder.keyDecodingStrategy = .convertFromSnakeCase
+                return try decoder.decode(T.self, from: data)
             } catch {
                 throw APIError.decoding(error, rawBody)
             }
