@@ -77,6 +77,12 @@ struct HomeView: View {
                 }
             }
             .navigationTitle("Cinemana")
+            .navigationBarTitleDisplayMode(.large)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Text(BuildInfo.label).font(.caption2).foregroundStyle(.secondary)
+                }
+            }
             .task { await vm.load() }
             .refreshable { await vm.load() }
             .navigationDestination(for: String.self) { id in
