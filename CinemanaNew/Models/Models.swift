@@ -123,7 +123,7 @@ extension Banner: Identifiable {
     var id: String { link ?? imgObjUrl ?? UUID().uuidString }
 }
 
-struct VideoGroup: Codable, Hashable, Identifiable {
+struct VideoGroup: Decodable, Hashable, Identifiable {
     let groupID: String?
     let name: String?
     let items: [VideoModel]?
