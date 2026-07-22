@@ -54,7 +54,7 @@ struct HomeView: View {
                         if !vm.banners.isEmpty {
                             TabView {
                                 ForEach(vm.banners) { banner in
-                                    AsyncImage(url: URL(string: banner.imgUrl ?? "")) { $0.resizable().scaledToFill() } placeholder: { Color.gray.opacity(0.2) }
+                                    AsyncImage(url: URL(string: banner.imgObjUrl ?? "")) { $0.resizable().scaledToFill() } placeholder: { Color.gray.opacity(0.2) }
                                         .frame(height: 200)
                                         .clipped()
                                 }

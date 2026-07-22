@@ -106,11 +106,21 @@ struct CollectionModel: Codable, Hashable, Identifiable {
     let imgUrl: String?
 }
 
-struct Banner: Codable, Hashable, Identifiable {
-    let id: String
-    let imgUrl: String?
-    let videoId: String?
-    let title: String?
+struct Banner: Codable, Hashable {
+    let imgObjUrl: String?
+    let imgThumb: String?
+    let img: String?
+    let link: String?
+
+    /// The video id is embedded in the link, e.g. ".../video/en/3112880?show..."
+    var videoId: String? {
+        guard let link, let match = link.split(separator: "/").last else { return nil }
+        return match.split(separator: "?").first.map(String.init)
+    }
+}
+
+extension Banner: Identifiable {
+    var id: String { link ?? imgObjUrl ?? UUID().uuidString }
 }
 
 struct VideoGroup: Codable, Hashable, Identifiable {
