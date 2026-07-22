@@ -77,18 +77,23 @@ def main():
     lines.append("/* End PBXBuildFile section */")
 
     # PBXFileReference
+    # NOTE: `path` must be the location relative to the project root (SRCROOT),
+    # since the main group has no `path` of its own (sourceTree = "<group>").
+    # Using only the basename here previously caused Xcode to look for every
+    # file directly in SRCROOT instead of its actual subfolder, producing
+    # "Build input files cannot be found" errors.
     lines.append("\n/* Begin PBXFileReference section */")
     for f in swift_files:
         lines.append(
             f'\t\t{file_refs[f]} /* {os.path.basename(f)} */ = '
             f'{{isa = PBXFileReference; lastKnownFileType = sourcecode.swift; '
-            f'path = "{os.path.basename(f)}"; sourceTree = "<group>"; }};'
+            f'name = "{os.path.basename(f)}"; path = "{f}"; sourceTree = "<group>"; }};'
         )
     plist_ref_uuid = uuid_for(f"ref:{plist_path}")
     lines.append(
         f'\t\t{plist_ref_uuid} /* Info.plist */ = '
         f'{{isa = PBXFileReference; lastKnownFileType = text.plist.xml; '
-        f'path = Info.plist; sourceTree = "<group>"; }};'
+        f'name = "Info.plist"; path = "{plist_path}"; sourceTree = "<group>"; }};'
     )
     lines.append(
         f'\t\t{product_ref_uuid} /* {APP_NAME}.app */ = '
