@@ -6,12 +6,12 @@ struct HomeView: View {
     var body: some View {
         NavigationView {
             ScrollView {
-                if vm.isLoading && vm.banners.isEmpty {
+                if vm.isLoading && vm.banners.isEmpty && vm.newlyVideos.isEmpty {
                     ProgressView().padding(80)
                 } else {
                     LazyVStack(alignment: .leading, spacing: 28) {
 
-                        // Banner
+                        // Featured banner
                         if !vm.banners.isEmpty {
                             SectionTitle("Featured")
                             BannerCarousel(items: vm.banners)
@@ -23,7 +23,25 @@ struct HomeView: View {
                             PosterRow(items: vm.newlyVideos)
                         }
 
-                        // Groups
+                        // Movies
+                        if !vm.moviesPage1.isEmpty {
+                            SectionTitle("Movies")
+                            PosterRow(items: vm.moviesPage1)
+                        }
+
+                        // Series
+                        if !vm.seriesPage1.isEmpty {
+                            SectionTitle("Series")
+                            PosterRow(items: vm.seriesPage1)
+                        }
+
+                        // More Movies
+                        if !vm.moviesPage2.isEmpty {
+                            SectionTitle("More Movies")
+                            PosterRow(items: vm.moviesPage2)
+                        }
+
+                        // Groups from API
                         ForEach(vm.groups) { grp in
                             if let items = vm.groupVideos[grp.id], !items.isEmpty {
                                 SectionTitle(grp.displayTitle)
@@ -32,7 +50,7 @@ struct HomeView: View {
                         }
 
                         // Empty state
-                        if vm.banners.isEmpty && vm.newlyVideos.isEmpty && !vm.isLoading {
+                        if vm.banners.isEmpty && vm.moviesPage1.isEmpty && !vm.isLoading {
                             VStack(spacing: 16) {
                                 Image(systemName: "wifi.exclamationmark")
                                     .font(.system(size: 50)).foregroundColor(.secondary)
@@ -53,7 +71,7 @@ struct HomeView: View {
     }
 }
 
-// MARK: - Subviews
+// MARK: - Reusable Components
 struct SectionTitle: View {
     let text: String
     init(_ text: String) { self.text = text }
@@ -67,7 +85,7 @@ struct BannerCarousel: View {
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 12) {
-                ForEach(items.prefix(12)) { item in
+                ForEach(items.prefix(15)) { item in
                     NavigationLink(destination: DetailView(video: item)) {
                         BannerCard(item: item)
                     }.buttonStyle(.plain)
@@ -82,7 +100,7 @@ struct PosterRow: View {
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 12) {
-                ForEach(items.prefix(20)) { item in
+                ForEach(items) { item in
                     NavigationLink(destination: DetailView(video: item)) {
                         PosterCard(item: item)
                     }.buttonStyle(.plain)
@@ -129,20 +147,15 @@ struct CachedImage: View {
     let url: URL?
     let width: CGFloat
     let height: CGFloat
-
     var body: some View {
         AsyncImage(url: url) { phase in
             switch phase {
-            case .success(let img):
-                img.resizable().scaledToFill()
-            case .failure:
-                Color(.systemGray5)
+            case .success(let img): img.resizable().scaledToFill()
+            case .failure: Color(.systemGray5)
                     .overlay(Image(systemName: "film").foregroundColor(.secondary))
-            default:
-                Color(.systemGray5).overlay(ProgressView())
+            default: Color(.systemGray5).overlay(ProgressView())
             }
         }
-        .frame(width: width, height: height)
-        .clipped()
+        .frame(width: width, height: height).clipped()
     }
 }

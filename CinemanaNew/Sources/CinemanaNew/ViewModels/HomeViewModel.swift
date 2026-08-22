@@ -2,13 +2,16 @@ import Foundation
 import Combine
 
 class HomeViewModel: ObservableObject {
-    @Published var banners: [VideoItem] = []
-    @Published var newlyVideos: [VideoItem] = []
+    @Published var banners:       [VideoItem] = []
+    @Published var newlyVideos:   [VideoItem] = []
+    @Published var moviesPage1:   [VideoItem] = []
+    @Published var seriesPage1:   [VideoItem] = []
+    @Published var moviesPage2:   [VideoItem] = []
+    @Published var groups:        [VideoGroup] = []
+    @Published var groupVideos:   [String: [VideoItem]] = [:]
+    @Published var categories:    [VideoCategory] = []
     @Published var searchResults: [VideoItem] = []
-    @Published var groups: [VideoGroup] = []
-    @Published var groupVideos: [String: [VideoItem]] = [:]
-    @Published var categories: [VideoCategory] = []
-    @Published var isLoading = false
+    @Published var isLoading  = false
     @Published var isSearching = false
     @Published var errorMessage: String?
 
@@ -16,56 +19,55 @@ class HomeViewModel: ObservableObject {
 
     func loadHome() {
         isLoading = true
-        let group = DispatchGroup()
+        let g = DispatchGroup()
 
-        group.enter()
-        api.banner { [weak self] result in
+        g.enter()
+        api.banner { [weak self] r in DispatchQueue.main.async {
+            if case .success(let v) = r { self?.banners = v }; g.leave() } }
+
+        g.enter()
+        api.newlyVideos { [weak self] r in DispatchQueue.main.async {
+            if case .success(let v) = r { self?.newlyVideos = v }; g.leave() } }
+
+        // Movies page 1 (kind=1)
+        g.enter()
+        api.browseVideos(videoKind: 1, page: 1, perPage: 20) { [weak self] r in
             DispatchQueue.main.async {
-                if case .success(let items) = result { self?.banners = items }
-                group.leave()
-            }
-        }
+                if case .success(let v) = r { self?.moviesPage1 = v }; g.leave() } }
 
-        group.enter()
-        api.newlyVideos { [weak self] result in
+        // Series page 1 (kind=2)
+        g.enter()
+        api.browseVideos(videoKind: 2, page: 1, perPage: 20) { [weak self] r in
             DispatchQueue.main.async {
-                if case .success(let items) = result { self?.newlyVideos = items }
-                group.leave()
-            }
-        }
+                if case .success(let v) = r { self?.seriesPage1 = v }; g.leave() } }
 
-        group.enter()
-        api.videoGroups { [weak self] result in
+        // Movies page 2 for variety
+        g.enter()
+        api.browseVideos(videoKind: 1, page: 2, perPage: 20) { [weak self] r in
             DispatchQueue.main.async {
-                if case .success(let g) = result {
-                    self?.groups = Array(g.prefix(6))
-                    // load first 3 groups
-                    for grp in g.prefix(3) {
-                        self?.loadGroupVideos(groupID: grp.id)
-                    }
-                }
-                group.leave()
-            }
-        }
+                if case .success(let v) = r { self?.moviesPage2 = v }; g.leave() } }
 
-        group.enter()
-        api.categories { [weak self] result in
-            DispatchQueue.main.async {
-                if case .success(let cats) = result { self?.categories = cats }
-                group.leave()
-            }
-        }
+        // Groups
+        g.enter()
+        api.videoGroups { [weak self] r in DispatchQueue.main.async {
+            if case .success(let v) = r {
+                self?.groups = Array(v.prefix(8))
+                for grp in v.prefix(5) { self?.loadGroupVideos(groupID: grp.id) }
+            }; g.leave() } }
 
-        group.notify(queue: .main) { [weak self] in
-            self?.isLoading = false
-        }
+        // Categories
+        g.enter()
+        api.categories { [weak self] r in DispatchQueue.main.async {
+            if case .success(let v) = r { self?.categories = v }; g.leave() } }
+
+        g.notify(queue: .main) { [weak self] in self?.isLoading = false }
     }
 
     func loadGroupVideos(groupID: String) {
-        api.videoListPagination(groupID: groupID) { [weak self] result in
+        api.videoListPagination(groupID: groupID) { [weak self] r in
             DispatchQueue.main.async {
-                if case .success(let items) = result {
-                    self?.groupVideos[groupID] = items
+                if case .success(let v) = r, !v.isEmpty {
+                    self?.groupVideos[groupID] = v
                 }
             }
         }
@@ -75,14 +77,13 @@ class HomeViewModel: ObservableObject {
         guard !query.trimmingCharacters(in: .whitespaces).isEmpty else {
             searchResults = []; isSearching = false; return
         }
-        isSearching = true
-        isLoading = true
-        api.search(title: query, type: type) { [weak self] result in
+        isSearching = true; isLoading = true
+        api.search(title: query, type: type) { [weak self] r in
             DispatchQueue.main.async {
                 self?.isLoading = false
-                switch result {
-                case .success(let items): self?.searchResults = items
-                case .failure(let e):    self?.errorMessage = e.localizedDescription
+                switch r {
+                case .success(let v): self?.searchResults = v
+                case .failure(let e): self?.errorMessage = e.localizedDescription
                 }
             }
         }
