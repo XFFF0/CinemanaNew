@@ -7,8 +7,8 @@ struct DetailView: View {
     @State private var selectedFileID: String?
     @State private var playerURL: URL?
     @State private var showPlayer = false
-    @State private var commentText = ""
     @State private var showComments = false
+    @State private var commentText = ""
 
     var body: some View {
         ScrollView {
@@ -21,10 +21,10 @@ struct DetailView: View {
                     if video.isSeries && !vm.episodes.isEmpty {
                         Divider(); episodesSection
                     }
-                    Divider(); commentsSection
                     if !vm.relatedVideos.isEmpty {
                         Divider(); relatedSection
                     }
+                    Divider(); commentsSection
                 }.padding()
             }
         }
@@ -36,71 +36,73 @@ struct DetailView: View {
         .onAppear { vm.loadAll(video: video) }
     }
 
-    // MARK: Hero
+    // MARK: - Hero
     @ViewBuilder var heroSection: some View {
         ZStack(alignment: .bottom) {
-            AsyncImage(url: video.fullURL) { phase in
+            AsyncImage(url: video.fullURL ?? video.medURL) { phase in
                 switch phase {
                 case .success(let img): img.resizable().scaledToFit()
-                default: Color(.systemGray5).frame(height: 220)
+                default: Color(.systemGray5).frame(height: 250)
                     .overlay(Image(systemName: "film").font(.system(size: 60)).foregroundColor(.secondary))
                 }
             }.frame(maxWidth: .infinity)
 
-            // Gradient + play overlay
-            LinearGradient(colors: [.clear, .black.opacity(0.7)],
-                           startPoint: .center, endPoint: .bottom)
+            LinearGradient(colors: [.clear, .black.opacity(0.75)],
+                           startPoint: .top, endPoint: .bottom)
 
-            HStack {
-                Spacer()
-                Button {
-                    if playerURL == nil, let f = vm.videoFiles.first {
-                        playerURL = f.streamURL; selectedFileID = f.id
-                    }
-                    showPlayer = vm.videoFiles.isEmpty == false
-                } label: {
-                    Image(systemName: "play.circle.fill")
-                        .font(.system(size: 60))
-                        .foregroundColor(vm.videoFiles.isEmpty ? .gray : .white)
-                        .shadow(radius: 8)
+            Button {
+                if playerURL == nil, let f = vm.videoFiles.first {
+                    playerURL = f.streamURL; selectedFileID = f.id
                 }
-                Spacer()
-            }.padding(.bottom, 16)
+                if !vm.videoFiles.isEmpty { showPlayer = true }
+            } label: {
+                Image(systemName: "play.circle.fill")
+                    .font(.system(size: 64))
+                    .foregroundColor(vm.videoFiles.isEmpty ? Color.white.opacity(0.4) : .white)
+                    .shadow(color: .black.opacity(0.5), radius: 8)
+            }
+            .padding(.bottom, 20)
         }
     }
 
-    // MARK: Title
+    // MARK: - Title
     @ViewBuilder var titleSection: some View {
         Text(video.displayTitle).font(.title2).bold()
-        HStack(spacing: 12) {
-            if let yr = video.year { Label(yr, systemImage: "calendar").font(.subheadline).foregroundColor(.secondary) }
-            if let st = video.stars, st != "0" { Label(st, systemImage: "star.fill").font(.subheadline).foregroundColor(.yellow) }
-            Text(video.isMovie ? "Movie" : video.isSeries ? "Series" : "")
-                .font(.caption).bold().foregroundColor(.white)
-                .padding(.horizontal, 8).padding(.vertical, 3)
-                .background(video.isMovie ? Color.blue : Color.purple).cornerRadius(6)
+
+        HStack(spacing: 10) {
+            if let yr = video.year {
+                Label(yr, systemImage: "calendar").font(.subheadline).foregroundColor(.secondary)
+            }
+            if let score = video.imdbScore {
+                IMDbBadge(score: score)
+            }
+            TypeBadge(isMovie: video.isMovie, isSeries: video.isSeries)
         }
+
         if let desc = video.enContent, !desc.isEmpty {
             Text(desc).font(.body).foregroundColor(.secondary)
         }
-        if let url = video.imdbURL {
-            Link(destination: url) {
-                Label("View on IMDb", systemImage: "link").font(.subheadline).foregroundColor(.orange)
+
+        HStack(spacing: 16) {
+            if let url = video.imdbURL {
+                Link(destination: url) {
+                    Label("IMDb", systemImage: "link").font(.subheadline).foregroundColor(.orange)
+                }
             }
-        }
-        if let tURL = video.trailerURL {
-            Link(destination: tURL) {
-                Label("Watch Trailer", systemImage: "play.rectangle").font(.subheadline).foregroundColor(.blue)
+            if let tURL = video.trailerURL {
+                Link(destination: tURL) {
+                    Label("Trailer", systemImage: "play.rectangle").font(.subheadline).foregroundColor(.blue)
+                }
             }
         }
     }
 
-    // MARK: Quality + Play
+    // MARK: - Quality
     @ViewBuilder var qualitySection: some View {
         if vm.isLoading {
             HStack { ProgressView(); Text("Loading sources…").foregroundColor(.secondary) }
         } else if vm.videoFiles.isEmpty {
-            Label("No sources available", systemImage: "xmark.circle").foregroundColor(.secondary)
+            Label("No video sources", systemImage: "xmark.circle").foregroundColor(.secondary)
         } else {
             VStack(alignment: .leading, spacing: 10) {
                 Text("Quality").font(.headline)
@@ -135,7 +137,7 @@ struct DetailView: View {
         }
     }
 
-    // MARK: Episodes
+    // MARK: - Episodes
     @ViewBuilder var episodesSection: some View {
         Text("Episodes (\(vm.episodes.count))").font(.headline)
         ForEach(vm.episodes) { ep in
@@ -147,10 +149,10 @@ struct DetailView: View {
                     AsyncImage(url: ep.thumbURL) { phase in
                         switch phase {
                         case .success(let img): img.resizable().scaledToFill()
-                        default: Color(.systemGray5).overlay(Image(systemName: "play.rectangle").foregroundColor(.secondary))
+                        default: Color(.systemGray5)
+                            .overlay(Image(systemName: "play.rectangle").foregroundColor(.secondary))
                         }
-                    }
-                    .frame(width: 90, height: 55).clipped().cornerRadius(6)
+                    }.frame(width: 90, height: 55).clipped().cornerRadius(6)
                     VStack(alignment: .leading, spacing: 2) {
                         Text(ep.displayTitle).font(.subheadline).lineLimit(2).foregroundColor(.primary)
                         if let s = ep.season, let e = ep.episodeNummer {
@@ -165,41 +167,7 @@ struct DetailView: View {
         }
     }
 
-    // MARK: Comments
-    @ViewBuilder var commentsSection: some View {
-        VStack(alignment: .leading, spacing: 10) {
-            Button { withAnimation { showComments.toggle() } } label: {
-                HStack {
-                    Text("Comments (\(vm.comments.count))").font(.headline)
-                    Spacer()
-                    Image(systemName: showComments ? "chevron.up" : "chevron.down").foregroundColor(.secondary)
-                }
-            }.buttonStyle(.plain)
-
-            if showComments {
-                if vm.isLoadingComments {
-                    ProgressView()
-                } else if vm.comments.isEmpty {
-                    Text("No comments yet").foregroundColor(.secondary).font(.subheadline)
-                } else {
-                    ForEach(vm.comments.prefix(10)) { c in
-                        VStack(alignment: .leading, spacing: 4) {
-                            HStack {
-                                Text(c.userName ?? "User").font(.caption).bold()
-                                Spacer()
-                                if let d = c.itemDate { Text(d).font(.caption2).foregroundColor(.secondary) }
-                            }
-                            Text(c.comment ?? "").font(.subheadline)
-                        }
-                        .padding(.vertical, 4)
-                        Divider()
-                    }
-                }
-            }
-        }
-    }
-
-    // MARK: Related
+    // MARK: - Related
     @ViewBuilder var relatedSection: some View {
         Text("More Like This").font(.headline)
         ScrollView(.horizontal, showsIndicators: false) {
@@ -212,20 +180,51 @@ struct DetailView: View {
             }
         }
     }
+
+    // MARK: - Comments
+    @ViewBuilder var commentsSection: some View {
+        Button { withAnimation { showComments.toggle() } } label: {
+            HStack {
+                Text("Comments (\(vm.comments.count))").font(.headline)
+                Spacer()
+                Image(systemName: showComments ? "chevron.up" : "chevron.down").foregroundColor(.secondary)
+            }
+        }.buttonStyle(.plain)
+
+        if showComments {
+            if vm.isLoadingComments {
+                ProgressView()
+            } else {
+                ForEach(vm.comments.prefix(15)) { c in
+                    VStack(alignment: .leading, spacing: 4) {
+                        HStack {
+                            Text(c.userName ?? "User").font(.caption).bold()
+                            Spacer()
+                            if let d = c.itemDate { Text(d).font(.caption2).foregroundColor(.secondary) }
+                        }
+                        Text(c.comment ?? "").font(.subheadline)
+                    }
+                    .padding(.vertical, 4)
+                    Divider()
+                }
+                if vm.comments.isEmpty {
+                    Text("No comments yet").foregroundColor(.secondary).font(.subheadline)
+                }
+            }
+        }
+    }
 }
 
-// MARK: - Full Screen Player
+// MARK: - Player
 struct VideoPlayerView: View {
     let url: URL
     @Environment(\.dismiss) private var dismiss
     @State private var player: AVPlayer?
-
     var body: some View {
         ZStack(alignment: .topTrailing) {
             Color.black.ignoresSafeArea()
             if let player = player {
-                VideoPlayer(player: player)
-                    .ignoresSafeArea()
+                VideoPlayer(player: player).ignoresSafeArea()
                     .onAppear { player.play() }
                     .onDisappear { player.pause() }
             } else {
