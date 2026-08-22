@@ -1,23 +1,31 @@
 import Foundation
 
 class DetailViewModel: ObservableObject {
-    @Published var videoFiles: [TranscodedFile] = []
-    @Published var episodes: [SeasonEpisode] = []
-    @Published var comments: [VideoComment] = []
+    @Published var videoFiles:    [TranscodedFile] = []
+    @Published var episodes:      [SeasonEpisode] = []
+    @Published var comments:      [VideoComment] = []
     @Published var relatedVideos: [VideoItem] = []
-    @Published var isLoading = false
+    @Published var isLoading         = false
     @Published var isLoadingComments = false
+    @Published var currentEpisodeID: String?
 
     private let api = NetworkService.shared
 
     func loadAll(video: VideoItem) {
-        loadFiles(videoId: video.id)
+        // For movies — load files directly
+        if video.isMovie {
+            loadFiles(videoId: video.id)
+        }
+        // For series — first load episodes, then auto-load first episode files
+        if video.isSeries {
+            loadEpisodes(rootId: video.id)
+        }
         loadComments(videoId: video.id)
-        if video.isSeries { loadEpisodes(rootId: video.id) }
-        // fetch recommendations via browse same kind
-        api.browseVideos(videoKind: video.isMovie ? 1 : 2) { [weak self] result in
+
+        // Related
+        api.browseVideos(videoKind: video.isMovie ? 1 : 2, page: 1) { [weak self] r in
             DispatchQueue.main.async {
-                if case .success(let items) = result {
+                if case .success(let items) = r {
                     self?.relatedVideos = items.filter { $0.id != video.id }.prefix(10).map { $0 }
                 }
             }
@@ -26,28 +34,35 @@ class DetailViewModel: ObservableObject {
 
     func loadFiles(videoId: String) {
         isLoading = true
-        api.transcoddedFiles(id: videoId) { [weak self] result in
+        currentEpisodeID = videoId
+        api.transcoddedFiles(id: videoId) { [weak self] r in
             DispatchQueue.main.async {
                 self?.isLoading = false
-                if case .success(let files) = result { self?.videoFiles = files }
+                if case .success(let files) = r { self?.videoFiles = files }
             }
         }
     }
 
     func loadEpisodes(rootId: String) {
-        api.videoSeason(id: rootId) { [weak self] result in
+        api.videoSeason(id: rootId) { [weak self] r in
             DispatchQueue.main.async {
-                if case .success(let eps) = result { self?.episodes = eps }
+                if case .success(let eps) = r {
+                    self?.episodes = eps
+                    // Auto-load first episode files
+                    if let first = eps.first {
+                        self?.loadFiles(videoId: first.id)
+                    }
+                }
             }
         }
     }
 
     func loadComments(videoId: String) {
         isLoadingComments = true
-        api.videoComments(id: videoId) { [weak self] result in
+        api.videoComments(id: videoId) { [weak self] r in
             DispatchQueue.main.async {
                 self?.isLoadingComments = false
-                if case .success(let c) = result { self?.comments = c }
+                if case .success(let c) = r { self?.comments = c }
             }
         }
     }
