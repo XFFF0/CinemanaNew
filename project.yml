@@ -1,0 +1,48 @@
+name: CinemanaNew
+options:
+  bundleIdPrefix: com.shabakaty.cinemananew
+  deploymentTarget:
+    iOS: "15.0"
+
+settings:
+  base:
+    PRODUCT_BUNDLE_IDENTIFIER: com.shabakaty.cinemananew
+    MARKETING_VERSION: 1.0.0
+    CURRENT_PROJECT_VERSION: 1
+    SWIFT_VERSION: 5.9
+    TARGETED_DEVICE_FAMILY: "1,2"
+    CODE_SIGNING_ALLOWED: NO
+    CODE_SIGNING_REQUIRED: NO
+    CODE_SIGN_IDENTITY: ""
+    DEVELOPMENT_TEAM: ""
+
+targets:
+  CinemanaNew:
+    type: application
+    platform: iOS
+    sources:
+      - path: CinemanaNew/Sources/CinemanaNew
+    resources:
+      - path: CinemanaNew/Assets.xcassets
+    info:
+      path: CinemanaNew/Info.plist
+      properties:
+        CFBundleName: "Cinemana New"
+        CFBundleDisplayName: "Cinemana New"
+        CFBundleIdentifier: com.shabakaty.cinemananew
+        CFBundleShortVersionString: "1.0.0"
+        CFBundleVersion: "1"
+        LSRequiresIPhoneOS: true
+        UISupportedInterfaceOrientations:
+          - UIInterfaceOrientationPortrait
+          - UIInterfaceOrientationLandscapeLeft
+          - UIInterfaceOrientationLandscapeRight
+        UISupportedInterfaceOrientations~ipad:
+          - UIInterfaceOrientationPortrait
+          - UIInterfaceOrientationPortraitUpsideDown
+          - UIInterfaceOrientationLandscapeLeft
+          - UIInterfaceOrientationLandscapeRight
+        NSAppTransportSecurity:
+          NSAllowsArbitraryLoads: true
+        UIApplicationSceneManifest:
+          UIApplicationSupportsMultipleScenes: false
