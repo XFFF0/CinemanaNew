@@ -53,7 +53,7 @@ struct VideoItem: Identifiable, Codable {
     }
 }
 
-struct TranscodedFile: Codable, Identifiable {
+struct TranscodedFile: Codable, Identifiable, Equatable {
     let id: String
     let resolution: String?
     let file: String?

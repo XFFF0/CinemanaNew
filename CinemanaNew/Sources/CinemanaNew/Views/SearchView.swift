@@ -57,9 +57,9 @@ struct SearchView: View {
             }
             .navigationTitle("Search")
             .searchable(text: $query, prompt: "Movies, series, actors…")
-            .onChange(of: query) { v in
+            .onChange(of: query, perform: { v in
                 if v.isEmpty { vm.clearSearch() }
-            }
+            })
             .onSubmit(of: .search) {
                 let type = filter == 2 ? "series" : "movie"
                 vm.search(query: query, type: type)

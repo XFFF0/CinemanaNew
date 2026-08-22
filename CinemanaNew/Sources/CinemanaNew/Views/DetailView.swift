@@ -34,12 +34,12 @@ struct DetailView: View {
         }
         .onAppear { vm.loadAll(video: video) }
         // When files load, auto-select first
-        .onChange(of: vm.videoFiles) { files in
+        .onChange(of: vm.videoFiles, perform: { files in
             if selectedFileID == nil, let first = files.first {
                 selectedFileID = first.id
                 playerURL = first.streamURL
             }
-        }
+        })
     }
 
     // MARK: - Hero

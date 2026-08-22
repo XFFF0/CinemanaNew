@@ -7,9 +7,12 @@ on:
 
 jobs:
   build:
-    runs-on: macos-latest
+    runs-on: macos-15
     steps:
       - uses: actions/checkout@v4
+
+      - name: Select Xcode
+        run: sudo xcode-select -s /Applications/Xcode_16.2.app
 
       - name: Install XcodeGen
         run: brew install xcodegen
@@ -19,6 +22,7 @@ jobs:
 
       - name: Build unsigned IPA
         run: |
+          set -o pipefail
           xcodebuild \
             -project CinemanaNew.xcodeproj \
             -scheme CinemanaNew \
@@ -29,7 +33,16 @@ jobs:
             CODE_SIGNING_REQUIRED=NO \
             CODE_SIGN_IDENTITY="" \
             DEVELOPMENT_TEAM="" \
-            clean build
+            IPHONEOS_DEPLOYMENT_TARGET=15.0 \
+            clean build 2>&1 | tee build.log | \
+            grep -E "error:|warning:|Build succeeded|FAILED" || true
+
+          if grep -q "BUILD FAILED" build.log; then
+            echo "=== ERRORS ===" 
+            grep "error:" build.log | head -30
+            exit 1
+          fi
+
           mkdir -p Payload
           cp -r build/Build/Products/Release-iphoneos/CinemanaNew.app Payload/
           zip -r CinemanaNew.ipa Payload
@@ -41,3 +54,10 @@ jobs:
           name: CinemanaNew-IPA
           path: CinemanaNew.ipa
           retention-days: 30
+
+      - name: Upload build log on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-log
+          path: build.log
